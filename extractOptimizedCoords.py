@@ -121,3 +121,5 @@ with open(foutput, "w") as fout :
 		arr = atom.split()
 		symbol = code.get(arr[1], 'X')
 		fout.write("%s %16.7f %16.7f %16.7f\n" % (symbol,float(arr[3]),float(arr[4]),float(arr[5])))
+	if fformat == "gjf" :
+		fout.write("\n")
