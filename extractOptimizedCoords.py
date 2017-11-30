@@ -102,9 +102,12 @@ code = {"1" : "H", "2" : "He", "3" : "Li", "4" : "Be", "5" : "B", \
 
 prefix = finput.strip(".log")
 foutput= ""
+chk = ""
 if optimized :
+	chk = prefix + "_optimized_out.chk"
 	foutput = prefix + "_optimized_out." + fformat
 else :
+	chk = prefix + "_out.chk"
 	foutput = prefix + "_out." + fformat
 
 with open(foutput, "w") as fout :
@@ -114,12 +117,12 @@ with open(foutput, "w") as fout :
 	if fformat == "xyz" :
 		fout.write(str(len(atoms)) + "\n\n")
 	else :
-		fout.write("%mem=\n%nprocshared=\n%chk=\n# \n\nComplex " + prefix + "\n\n")
+		fout.write("%mem=\n%nprocshared=\n%chk=" + chk + "\n# \n\nComplex " + prefix + "\n\n")
 		charge, multiplicity = getChargeAndMultiplicity(infoBlock)
 		fout.write(str(charge) + " " + str(multiplicity) + "\n")
 	for atom in atoms :
 		arr = atom.split()
 		symbol = code.get(arr[1], 'X')
-		fout.write("%s %16.7f %16.7f %16.7f\n" % (symbol,float(arr[3]),float(arr[4]),float(arr[5])))
+		fout.write("  %s %16.7f %16.7f %16.7f\n" % (symbol,float(arr[3]),float(arr[4]),float(arr[5])))
 	if fformat == "gjf" :
 		fout.write("\n")
