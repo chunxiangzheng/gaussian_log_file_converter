@@ -20,7 +20,7 @@ def getEnergy(structure) :
 			arr = line.split("=")
 			return float(re.split(" +", arr[1].strip())[0])
 	
-	raise ValueError("Cannot find energy")
+	return 1000.0
 
 infoBlock = ""
 optimized = False
